@@ -24,7 +24,10 @@ public class GraphQLConfig {
         TypeDefinitionRegistry typeRegistry = schemaParser.parse(schemaFile);
 
         RuntimeWiring wiring = RuntimeWiring.newRuntimeWiring()
-                .type("Query", builder -> builder.dataFetcher("user", userResolver::getUser))
+                .type("Query", builder -> builder.dataFetcher("user", environment -> {
+                    Long id = Long.parseLong(environment.getArgument("id"));
+                    return userResolver.getUser(id);
+                }))
                 .type("Mutation", builder -> {
                     builder.dataFetcher("createPost", environment -> {
                         String title = environment.getArgument("title");
