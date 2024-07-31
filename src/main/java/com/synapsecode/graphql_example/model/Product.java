@@ -1,4 +1,4 @@
-
+package com.synapsecode.graphql_example.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
