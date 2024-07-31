@@ -1,4 +1,4 @@
-
+package com.synapsecode.graphql_example.controller;
 
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
