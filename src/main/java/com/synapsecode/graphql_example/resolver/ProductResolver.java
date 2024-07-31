@@ -1,11 +1,11 @@
-package com.synapsecode.graphql_example.resolver
+package com.synapsecode.graphql_example.resolver;
 
-import com.example.demo.model.Product;
-import com.example.demo.repository.ProductRepository;
+import com.synapsecode.graphql_example.model.Product;
+import com.synapsecode.graphql_example.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Component

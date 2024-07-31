@@ -1,7 +1,7 @@
 package com.synapsecode.graphql_example.controller;
 
-import com.example.demo.model.Product;
-import com.example.demo.repository.ProductRepository;
+import com.synapsecode.graphql_example.model.Product;
+import com.synapsecode.graphql_example.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-public class ProductRestController {
+public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;

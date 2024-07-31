@@ -28,32 +28,36 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <spring-boot.version>3.1.2</spring-boot.version>
+        <hibernate.version>6.2.0.Final</hibernate.version>
     </properties>
     <dependencies>
-        <!-- Spring Boot Starter Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
         <!-- Spring Boot Starter Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
 
-        <!-- H2 Database (for in-memory database) -->
+        <!-- Hibernate Core -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- H2 Database -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- GraphQL Java Tools -->
+        <!-- Spring Boot Starter Web -->
         <dependency>
-            <groupId>com.graphql-java-kickstart</groupId>
-            <artifactId>graphql-java-tools</artifactId>
-            <version>11.0.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
 
         <!-- GraphQL Spring Boot Starter -->
@@ -63,20 +67,35 @@
             <version>11.1.0</version>
         </dependency>
 
-        <!-- GraphQL Spring Boot Starter Test (optional, for testing) -->
+        <!-- GraphQL Tools -->
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
-            <artifactId>graphql-spring-boot-starter-test</artifactId>
+            <artifactId>graphql-java-tools</artifactId>
             <version>11.1.0</version>
-            <scope>test</scope>
         </dependency>
+
+        <!-- GraphQL Java -->
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <version>17.3</version>
+        </dependency>
+
+        <!-- GraphQL Java Extended Scalars -->
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-extended-scalars</artifactId>
+            <version>17.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
+            <scope>provided</scope>
         </dependency>
-    </dependencies>
 
+    </dependencies>
 
     <build>
         <plugins>

@@ -1,6 +1,7 @@
 package com.synapsecode.graphql_example.config;
 
-import com.example.demo.model.Product;
+import com.synapsecode.graphql_example.model.Product;
+import com.synapsecode.graphql_example.resolver.ProductResolver;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
