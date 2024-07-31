@@ -1,49 +1,36 @@
 package com.synapsecode.graphql_example.config;
 
-import com.synapsecode.graphql_example.resolver.userResolver.UserResolver;
-import graphql.schema.GraphQLSchema;
-import graphql.schema.idl.RuntimeWiring;
-import graphql.schema.idl.SchemaGenerator;
-import graphql.schema.idl.SchemaParser;
-import graphql.schema.idl.TypeDefinitionRegistry;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
+import com.example.demo.model.Product;
+import graphql.kickstart.tools.GraphQLMutationResolver;
+import graphql.kickstart.tools.GraphQLQueryResolver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
-@Configuration
-public class GraphQLConfig {
-    @Bean
-    public GraphQLSchema schema(UserResolver userResolver) throws IOException {
-        SchemaParser schemaParser = new SchemaParser();
-        SchemaGenerator schemaGenerator = new SchemaGenerator();
+@Component
+public class GraphQLConfig implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-        File schemaFile = new ClassPathResource("schema.graphqls").getFile();
-        TypeDefinitionRegistry typeRegistry = schemaParser.parse(schemaFile);
+    @Autowired
+    private ProductResolver productResolver;
 
-        RuntimeWiring wiring = RuntimeWiring.newRuntimeWiring()
-                .type("Query", builder -> builder.dataFetcher("user", environment -> {
-                    Long id = Long.parseLong(environment.getArgument("id"));
-                    return userResolver.getUser(id);
-                }))
-                .type("Mutation", builder -> {
-                    builder.dataFetcher("createPost", environment -> {
-                        String title = environment.getArgument("title");
-                        String content = environment.getArgument("content");
-                        Long authorId = Long.parseLong(environment.getArgument("authorId"));
-                        return userResolver.createPost(title, content, authorId);
-                    });
-                    builder.dataFetcher("updateUser", environment -> {
-                        Long id = Long.parseLong(environment.getArgument("id"));
-                        String name = environment.getArgument("name");
-                        return userResolver.updateUser(id, name);
-                    });
-                    return builder;
-                })
-                .build();
+    public List<Product> products() {
+        return productResolver.getProducts();
+    }
 
-        return schemaGenerator.makeExecutableSchema(typeRegistry, wiring);
+    public Product product(Long id) {
+        return productResolver.getProduct(id);
+    }
+
+    public Product createProduct(String name, String description, double price) {
+        return productResolver.createProduct(name, description, price);
+    }
+
+    public Product updateProduct(Long id, String name, String description, double price) {
+        return productResolver.updateProduct(id, name, description, price);
+    }
+
+    public boolean deleteProduct(Long id) {
+        return productResolver.deleteProduct(id);
     }
 }
